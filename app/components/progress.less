@@ -1,16 +1,20 @@
 .pregress{
-  padding: 40px 10px;
-  &>div{
-    width: 300px;
-    margin: 0 auto;
-    &>img{
-      vertical-align: middle;
+    width: 100%;
+    background: #ccc;
+    height: 4px;
+    cursor: pointer;
+    .pregressIng{
+      width: 20%;
+      background: #2f9842;
+      height: 100%;
+      position: relative;
     }
-    &>span{
-      font-size: 15px;
-      margin-left: 20px;
+
+    .pregressIng_son{
+      position: absolute;
+      right: 3px;
+      top: -20px;
     }
-  }
 }
 
 .clear_float::after{
