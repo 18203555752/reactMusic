@@ -15,7 +15,7 @@ let Progress = React.createClass({
   render(){
       return (
         <div className="pregress" ref="progressBar" onClick={this.changeTime}>
-          <div className="clear_float pregressIng" style={{width:`${this.props.progress.abs}%`;background:`${this.props.bacColor}%`}}
+          <div className="clear_float pregressIng" style={{width:`${this.props.progress.abs}%`,background:this.props.bacColor}}
             >
               <div className="pregressIng_son">{this.props.progress.str}</div>
           </div>

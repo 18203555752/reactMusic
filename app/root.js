@@ -1,8 +1,12 @@
 import React from 'react';
 import Header from './components/header';
 import Progress from './components/progress';
-
-let Root = React.createClass({
+import Player from './page/player';
+import List from './page/list';
+import Answer from './page/answer';
+import Question from './page/question';
+import { Router, IndexRoute, Link, Route, browserHistory, hashHistory} from 'react-router';
+let App = React.createClass({
     getInitialState(){
         return {
             progress:"-"
@@ -16,29 +20,30 @@ let Root = React.createClass({
                 }).jPlayer('play');
             }
         });
-        $("#player").bind($.jPlayer.event.timeupdate,(e) =>{
-            this.setState({
-                progress:{
-                  str:Math.round(e.jPlayer.status.currentTime)+"秒",
-                  abs:e.jPlayer.status.currentPercentAbsolute,
-                }
-            });
-            this.allTime=e.jPlayer.status.duration;
-        })
+
     },
-    allTime:'',
-    componentWillUnmount(){
-      $("#player").unbind($.jPlayer.event.timeupdate)
-    },
-    progress_handle:function(son){
-      $("#player").jPlayer('play',this.allTime*son)
-    },
+
     render(){
         return(
             <div>
               <Header />
-              <Progress progress_handle={this.progress_handle} progress={this.state.progress} aa="默默001"/>
+              {this.props.children}
             </div>
+        )
+    }
+});
+
+let Root = React.createClass({
+    render(){
+        return (
+            <Router history={hashHistory}>
+                <Route path="/" components={App}>
+                    <IndexRoute  components={Player} />
+                    <Route path="/list" components={List} />
+                    <Route path="/question" components={Question} />
+                    <Route path="/answer" components={Answer} />
+                </Route>
+            </Router>
         )
     }
 })
